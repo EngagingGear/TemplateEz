@@ -1,6 +1,6 @@
 # TemplateEz -- Simply generate templated text in a C# program
 
-Documentation is here <a href="https://github.com/EngagingGear/TemplateEz/wiki/TemplateEz----How-to-easily-generate-templated-output">documentation here.</a>
+<a href="https://github.com/EngagingGear/TemplateEz/wiki/TemplateEz----How-to-easily-generate-templated-output">Documentation is here.</a>
 
 Often when in our programs we want to generate a piece of text that is based on a template, but the details vary depending on the specific data. For example, we might want to generate a form email inserting the user’s name, address etc., or perhaps generate an invoice and save it in a database. Also, we might want to use a template engine to generate code files for automatic program generation, and there are a myriad other uses.
 
