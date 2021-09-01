@@ -1,4 +1,4 @@
-# TemplateEz -- a library to simply generate templated text in a C# program
+# TemplateEz -- Simply generate templated text in a C# program
 
 Documentation is here <a href="https://github.com/EngagingGear/TemplateEz/wiki/TemplateEz----How-to-easily-generate-templated-output">documentation here.</a>
 
