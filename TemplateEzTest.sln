@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateEz", "TemplateEz\TemplateEz.csproj", "{9EC4D154-CC11-4DFC-9C08-05A86531213B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{1640D28E-13F6-4881-80AC-28C90FF3F079}"
+	ProjectSection(SolutionItems) = preProject
+		D:\Dropbox\EzTemplates\EzTemplate.docx = D:\Dropbox\EzTemplates\EzTemplate.docx
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateEzTest", "TemplateEzTest\TemplateEzTest.csproj", "{97C13EB9-668B-4F04-9102-92EE47473998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryForTest", "LibraryForTest\LibraryForTest.csproj", "{3887605C-5FF3-449E-A0AA-90A0ABDA6DC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EC4D154-CC11-4DFC-9C08-05A86531213B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC4D154-CC11-4DFC-9C08-05A86531213B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC4D154-CC11-4DFC-9C08-05A86531213B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC4D154-CC11-4DFC-9C08-05A86531213B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97C13EB9-668B-4F04-9102-92EE47473998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97C13EB9-668B-4F04-9102-92EE47473998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97C13EB9-668B-4F04-9102-92EE47473998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97C13EB9-668B-4F04-9102-92EE47473998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3887605C-5FF3-449E-A0AA-90A0ABDA6DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3887605C-5FF3-449E-A0AA-90A0ABDA6DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3887605C-5FF3-449E-A0AA-90A0ABDA6DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3887605C-5FF3-449E-A0AA-90A0ABDA6DC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7608E42C-E5AA-4E0A-895E-505AEEDD5C18}
+	EndGlobalSection
+EndGlobal
