@@ -54,7 +54,7 @@ namespace TemplateEzNS
         /// <summary>
         /// Determines if lines have indent added, many for testing functions
         /// </summary>
-        public bool NoWrapInOutputAdd { get; set; } = false;
+        public bool NoWrapInOutputAdd { get; set; }
 
         /// <summary>
         /// Constructor. Create a template object by taking the template text and compiling it
@@ -85,7 +85,7 @@ namespace TemplateEzNS
                 ModelType = modelType
             };
             NoWrapInOutputAdd = noWrapInOutputAdd;
-            Init(new List<TemplateDef> {template},
+            Init(new List<TemplateDef> { template },
                 extraLibraries, lazyCompile, includeCallingAssembly,
                 Assembly.GetCallingAssembly().Location);
         }
@@ -171,8 +171,8 @@ namespace TemplateEzNS
                 // Join together the default from and back end with the transformed template code.
                 // We use substitution to insert various features.
                 codeBuilder.Append(string.Join(Environment.NewLine, _frontTemplate)
-                    .Replace("##EXTRA_USING##", 
-                        string.Join(Environment.NewLine, 
+                    .Replace("##EXTRA_USING##",
+                        string.Join(Environment.NewLine,
                             extraUsing.Select(u => $"using {u};")))
                     .Replace("##EXTRA_CODE##",
                         string.Join(Environment.NewLine, extraCode))
@@ -227,13 +227,13 @@ namespace TemplateEzNS
                 // and check that that type exists somewhere, however, this would leave all
                 // those assemblies loaded, which seems wasteful. If the type is wrong it will
                 // fail in the compile step.
-                if(names.Contains(template.Template.Name))
+                if (names.Contains(template.Template.Name))
                     throw new TemplateEzException(
                         $"Two templates have the same name {template.Template.Name}." +
                         " They must be unique.");
-                
+
                 names.Add(template.Template.Name);
-                if(!_nameRegex.IsMatch(template.Template.Name))
+                if (!_nameRegex.IsMatch(template.Template.Name))
                     throw new TemplateEzException(
                         $"Invalid template name \"{template.Template.Name}\"." +
                         " It may only contain letters digits or underscores.");
@@ -259,7 +259,7 @@ namespace TemplateEzNS
         private List<string> GetExtraLibrariesFromTemplate(List<string> templateText)
         {
             var result = new List<string>();
-            for(var lineNum=0;  lineNum < templateText.Count; lineNum++)
+            for (var lineNum = 0; lineNum < templateText.Count; lineNum++)
             {
                 var line = templateText[lineNum].Trim();
                 if (line.ToLower().StartsWith("#library"))
@@ -299,8 +299,8 @@ namespace TemplateEzNS
         {
             var gathering = false;
             var result = new List<string>();
-            int blockStartLineNum = -1;
-            for (int lineNum = 0; lineNum < templateText.Count; lineNum++)
+            var blockStartLineNum = -1;
+            for (var lineNum = 0; lineNum < templateText.Count; lineNum++)
             {
                 var line = templateText[lineNum].Trim();
                 if (!gathering && line.ToLower().Replace(" ", "") == "#code{")
@@ -380,7 +380,7 @@ namespace TemplateEzNS
                     throw new TemplateEzException($"Unterminated #template line: \"{line}\"");
                 parameters = parameters.Substring(0, parameters.Length - 1);
                 var split = parameters.Split(',');
-                if(split.Length != 2)
+                if (split.Length != 2)
                     throw new TemplateEzException($"Invalid #template line: \"{line}\"");
                 var templateName = split[0];
                 var model = split[1];
@@ -400,7 +400,7 @@ namespace TemplateEzNS
                 if (noWrapInOutputAdd)
                     return line;
                 else
-                    return "output.Add(@$\"" + line + "\");" + Environment.NewLine;
+                    return _indent + "output.Add(@$\"" + line + "\");" + Environment.NewLine;
             }
 
             if (!recursionGuard && line.Trim().StartsWith("#"))
@@ -430,13 +430,12 @@ namespace TemplateEzNS
                 // Keep the initial whitespace to indent the code properly
                 var initialWhitespaceCount = 0;
                 int chIndex;
-                for(chIndex = 0; chIndex < line.Length; chIndex++)
-                    if(line[chIndex] == ' ')
-                        initialWhitespaceCount++;
-                    else if (line[chIndex] == '\t')
-                        initialWhitespaceCount += 4;
+                for (chIndex = 0; chIndex < line.Length; chIndex++)
+                    if (char.IsWhiteSpace(line[chIndex]))
+                        buildString.Append(line[chIndex]);
                     else
                         break;
+                buildString.Append(new string(' ', initialWhitespaceCount));
                 // ReSharper disable RedundantAssignment
                 for (; chIndex < line.Length; chIndex++)
                 {
@@ -494,7 +493,7 @@ namespace TemplateEzNS
                         // Reading an identifier
                         pendingCode.Append(c);
                     }
-                    else if (readingCode && readFirstCharOfCode && pendingCloseBracketOpenBracket && 
+                    else if (readingCode && readFirstCharOfCode && pendingCloseBracketOpenBracket &&
                              (c != ')' || openBracketCount > 0))
                     {
                         // Reading a code bock within a set of brackets
@@ -550,7 +549,6 @@ namespace TemplateEzNS
                     return new string(' ', initialWhitespaceCount) + finishedLine;
                 else
                     return _indent +
-                           new string(' ', initialWhitespaceCount) +
                            "output.Add(@$\"" + finishedLine + "\");" + Environment.NewLine;
             }
         }
@@ -582,7 +580,7 @@ namespace TemplateEzNS
                 metadataReferences.Add(MetadataReference.CreateFromFile(lib));
             var compilation = CSharpCompilation.Create(
                     _generatedAssemblyName,
-                    new[] {syntaxTree},
+                    new[] { syntaxTree },
                     metadataReferences,
                     new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
@@ -621,15 +619,15 @@ namespace TemplateEzNS
             // Ensure it is compiled
             if (_assembly == null && _compileFailed)
                 throw new TemplateEzException("Trying to execute a template with failed compilation");
-            if(_assembly == null)
+            if (_assembly == null)
                 Compile(_compileCode, _extraLibraries);
 
             // Find the function in the assembly by reflection and call it passing in the source data as
             // a parameter.
             Type testClassType = _assembly.GetType($"{_generatedNamespaceName}.{_generatedClassName}");
-            var methodInfo = testClassType.GetMethod("Run_" + generatedFunctionName) 
+            var methodInfo = testClassType.GetMethod("Run_" + generatedFunctionName)
                        ?? throw new TemplateEzException($"Trying to execute unknown template {generatedFunctionName}.");
-            
+
             var result = (List<string>)methodInfo.Invoke(null, new[] { model });
             return result;
         }
@@ -651,7 +649,7 @@ namespace TemplateEzNS
             "##EXTRA_CODE##",
             "",
             };
-        private readonly string[] _frontFnTemplate = 
+        private readonly string[] _frontFnTemplate =
         {
             "        public static List<string> Run_##FN_NAME##(##MODEL_TYPE## Model)",
             "        {",
@@ -695,9 +693,9 @@ namespace TemplateEzNS
     /// Exception thrown from template generation, containing all the information
     /// needed to debug it.
     /// </summary>
-    public class TemplateEzException: Exception
+    public class TemplateEzException : Exception
     {
-        public TemplateEzException(string message, Exception inner = null): base(message, inner)
+        public TemplateEzException(string message, Exception inner = null) : base(message, inner)
         {
         }
 

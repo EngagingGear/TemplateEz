@@ -15,6 +15,7 @@ namespace TemplateEzTest
         public void BasicTemplateWithFredSmith()
         {
             var templateText = SubSpecialChars(
+                "#using System;",
                 "Dear @Model.FirstName @Model.LastName,",
                 "",
                 "Your Date of birth is @(Model.DateOfBirth.Value.ToString(|MM/dd/yyyy|))"
